@@ -5,7 +5,7 @@ import { ProductList } from './compenents/ProductList/ProductList';
 function App(): React.JSX.Element {
   return (
     <View>
-      <ProductList />
+    
     </View>
   );
 }
