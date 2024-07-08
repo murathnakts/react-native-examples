@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ProductList } from './compenents/ProductList/ProductList';
+import { View} from 'react-native';
+import { UserList } from './compenents/UserPost/UserPost';
 
 function App(): React.JSX.Element {
   return (
     <View>
-    
+      <UserList />
     </View>
   );
 }
