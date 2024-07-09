@@ -15,14 +15,15 @@ const getComment = async (): Promise<IComment[]> => {
     return (await api).json();
 }
 
-export const CommentPost: React.FC<IUser> = ({ id, userID, title, body }) => {
+export const CommentPost: React.FC<IUser> = ({ id }) => {
 
     const [comments, setComments] = React.useState<IComment[]>([]);
 
     useEffect(() => {
         getComment().then(response => {
             const data = (response as IComment[]);
-            setComments(data.slice(0, 3));
+            const comment = data.filter(comments => comments.postId == id);
+            setComments(comment);
         });
     }, []);
 
@@ -31,13 +32,27 @@ export const CommentPost: React.FC<IUser> = ({ id, userID, title, body }) => {
             data={comments}
             keyExtractor={item => item.id.toString()}
             renderItem={({ item }) => (
-                <View>
-                    {
-                        id == item.postId &&
-                        <View>
-                            <Text>eşleşti</Text>
-                        </View>
-                    }
+                <View style={{padding:10}}>
+                    <Text style={{
+                        paddingLeft: 5,
+                        paddingTop: 5,
+                        color: 'black'
+                    }}>{item.name}</Text>
+                    <Text style={{
+                        paddingLeft: 5,
+                        paddingBottom: 5,
+                        color: 'gray'
+                    }}>{item.email}</Text>
+                    <View style={{
+                        borderWidth:1,
+                        borderRadius:15,
+                    }}>
+                        <Text style={{
+                            paddingLeft: 5,
+                            paddingTop: 5,
+                            color: 'black'
+                        }}>{item.body}</Text>
+                    </View>
                 </View>
             )}
         />
